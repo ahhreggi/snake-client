@@ -31,18 +31,31 @@ const handleUserInput = function(key, conn) {
     conn.write("Say: _(/)(\\)");
   // Messages: Spinner (i)
   } else if (key === 'i') {
-    let delay = 0;
-    const frames = ['|', '/', '-', '\\', '|', '/', '-', '\\'];
-    for (let frame of frames.concat(frames).concat(['|', ''])) {
-      setTimeout(() => {
-        conn.write(`Say: ${frame}`);
-      }, delay);
-      delay += 200;
+    if (!spinforever) {
+      spinforever = setInterval(() => {
+        conn.write(`Say: ${getSpinner()}`);
+      }, 300);
     }
+  } else if (key === 'u') {
+    clearInterval(spinforever);
+    spinforever = undefined;
+    conn.write('Say: \u001b[37m i\'m dizzy ><');
   // Messages: Hello (h)
   } else if (key === 'h') {
     conn.write('Say: hello!');
   }
+};
+
+// Spin Message Animation
+const spinFrames = ['|', '/', '-', '\\'];
+const allColors = ['\u001b[31m', '\u001b[32m', '\u001b[33m', '\u001b[34m', '\u001b[35m', '\u001b[36m', '\u001b[37m', ];
+let spinforever;
+let i = 0;
+
+const getSpinner = function() {
+  i = i < 3 ? i + 1 : 0;
+  let color = allColors[Math.floor(Math.random() * allColors.length)];
+  return `${color} ${spinFrames[i]} SPIN ${spinFrames[i]}`;
 };
 
 module.exports = { setupInput };
