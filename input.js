@@ -24,12 +24,12 @@ const handleUserInput = function(key, conn) {
     conn.write("Move: down");
   } else if (key === 'd') {
     conn.write("Move: right");
-  // Messages: Peek-a-boo! (p, o)
+  // Messages: Peek-a-boo! (P, O)
   } else if (key === 'p') {
     conn.write("Say: (\\(^.^)/)");
   } else if (key === 'o') {
     conn.write("Say: _(/)(\\)");
-  // Messages: Spinner (i)
+  // Messages: Spinner (I = start, U = stop)
   } else if (key === 'i') {
     if (!spinforever) {
       spinforever = setInterval(() => {
@@ -40,13 +40,13 @@ const handleUserInput = function(key, conn) {
     clearInterval(spinforever);
     spinforever = undefined;
     conn.write('Say: \u001b[37m i\'m dizzy ><');
-  // Messages: Hello (h)
+  // Messages: Hello (H)
   } else if (key === 'h') {
     conn.write('Say: hello!');
   }
 };
 
-// Spin Message Animation
+// Spin message animation
 const spinFrames = ['|', '/', '-', '\\'];
 const allColors = ['\u001b[31m', '\u001b[32m', '\u001b[33m', '\u001b[34m', '\u001b[35m', '\u001b[36m', '\u001b[37m', ];
 let spinforever;
