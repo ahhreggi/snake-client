@@ -12,7 +12,8 @@ const connect = function() {
   // Event handlers
   conn.on('connect', () => {
     console.log("Successfully connected to game server!");
-    conn.write('Name: REG');
+    conn.write('Name: LOL');
+    // conn.write('Move: up');
   });
   conn.on('data', () => {
     console.log("you ded cuz you idled");
